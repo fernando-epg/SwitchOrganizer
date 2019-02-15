@@ -52,15 +52,15 @@ public class FileLister {
             System.out.println("hashList is empty");
         }
     }
-    public void saveGameHash() {
-        for(String hash:hashList) {
-            gameList.add(new Game(hash));
-        }
-    }
+//    public void saveGameHash() {
+//        for(String hash:hashList) {
+//            gameList.add(new Game(hash));
+//        }
+//    }
     public void gameNamer() {
         GameRetrieve gameRetrieve = new GameRetrieve();
-        for(Game game : gameList) {
-            gameRetrieve.gameNamer(game);
+        for(String hash : hashList) {
+            gameList.add(gameRetrieve.gameNamer(hash));
         }
     }
 }

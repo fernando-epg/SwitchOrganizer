@@ -6,8 +6,9 @@ public class Game {
     private String name;
     private String hash;
 
-    public Game(String hash) {
+    public Game(String hash, String name) {
         this.hash = hash;
+        this.name = name;
     }
 
     public String getName() {

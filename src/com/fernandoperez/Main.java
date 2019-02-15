@@ -13,7 +13,7 @@ public class Main {
 
         FileLister fileLister = new FileLister(nintendoLocation);
         fileLister.lister();
-        fileLister.saveGameHash();
+//        fileLister.saveGameHash();
         fileLister.gameNamer();
         fileLister.printHashList();
     }
