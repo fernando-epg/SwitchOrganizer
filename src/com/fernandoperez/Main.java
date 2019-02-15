@@ -13,7 +13,9 @@ public class Main {
 
         FileLister fileLister = new FileLister(nintendoLocation);
         fileLister.lister();
-        fileLister.printGameList();
+        fileLister.saveGameHash();
+        fileLister.gameNamer();
+        fileLister.printHashList();
     }
 
 }

@@ -6,10 +6,12 @@ import java.util.ArrayList;
 public class FileLister {
     private String path;
     private ArrayList<String> hashList;
+    private ArrayList<Game> gameList;
 
     public FileLister(String path) {
         this.path = path;
         this.hashList = new ArrayList<>();
+        this.gameList = new ArrayList<>();
     }
 
     public void lister() {
@@ -25,7 +27,7 @@ public class FileLister {
             for (File file : fList) {
                 if (file.isDirectory()) {
                     lister(file.getAbsolutePath());
-                } else {
+                } else if (file.isFile()){
                     filenameSplit = file.getName().split("-");
                     hashSplit = filenameSplit[1].split("\\.");
 
@@ -41,7 +43,7 @@ public class FileLister {
         }
     }
 
-    public void printGameList() {
+    public void printHashList() {
         if(hashList != null) {
             for(String hash : hashList) {
                 System.out.println(hash);
@@ -50,8 +52,15 @@ public class FileLister {
             System.out.println("hashList is empty");
         }
     }
+    public void saveGameHash() {
+        for(String hash:hashList) {
+            gameList.add(new Game(hash));
+        }
+    }
+    public void gameNamer() {
+        GameRetrieve gameRetrieve = new GameRetrieve();
+        for(Game game : gameList) {
+            gameRetrieve.gameNamer(game);
+        }
+    }
 }
-
-
-
-
