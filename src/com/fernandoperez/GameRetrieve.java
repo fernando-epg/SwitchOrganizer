@@ -12,7 +12,7 @@ public class GameRetrieve {
     private Scanner fileScan;
     private HashMap<String, String> savedGames;
     public GameRetrieve() {
-        savedGames = new HashMap<String,String>();
+        savedGames = new HashMap<>();
     }
 
     public HashMap<String,String> savedGameRetriever() {

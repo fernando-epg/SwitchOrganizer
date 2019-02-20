@@ -11,7 +11,7 @@ public class FileLister {
 
     public FileLister(String path) {
         this.path = path;
-        hashMap = new HashMap<String, String>();
+        hashMap = new HashMap<>();
         gameRetrieve = new GameRetrieve();
         gameRetrieveFill();
     }

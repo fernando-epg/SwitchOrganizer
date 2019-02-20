@@ -1,0 +1,12 @@
+
+\.idea/
+
+HashList\.xlsx
+
+HashListCSV\.csv
+
+*.class
+
+*.kotlin_module
+
+*.iml

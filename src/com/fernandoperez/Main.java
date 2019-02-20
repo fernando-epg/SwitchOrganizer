@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        HashMap<String, String> storedGames = new HashMap<String,String>();
+        HashMap<String, String> storedGames = new HashMap<>();
 
         // Test directory instead of Drive letter
         String originalLocation = "C:\\users\\ferna\\Desktop\\Switch MicroSD";
