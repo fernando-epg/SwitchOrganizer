@@ -2,18 +2,20 @@ package com.fernandoperez;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
 public class GameRetrieve {
     private String hashPath = "./HashListCSV.csv"; //This might change for an option. Still thinking.
-    private Scanner fileScan;
     private File hashFile;
+    private Scanner fileScan;
+    private HashMap<String, String> savedGames;
     public GameRetrieve() {
-
+        savedGames = new HashMap<String,String>();
     }
 
-    public Game gameNamer(String hash) {
+    public HashMap<String,String> savedGameRetriever() {
         try {
             hashFile = new File(hashPath);
             fileScan = new Scanner(hashFile);
@@ -26,11 +28,8 @@ public class GameRetrieve {
         while(fileScan.hasNextLine()) {
             String line = fileScan.nextLine();
             tokens = line.split(",");
-            if(tokens[0].equals(hash)) {
-                Game newGame = new Game(tokens[0], tokens[1]);
-                return newGame;
-            }
+            savedGames.put(tokens[0],tokens[1]);
         }
-        return null;
+        return savedGames;
     }
 }

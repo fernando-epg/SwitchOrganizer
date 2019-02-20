@@ -1,21 +1,24 @@
 package com.fernandoperez;
 
+import java.util.HashMap;
+
 public class Main {
 
     public static void main(String[] args) {
+
+        HashMap<String, String> storedGames = new HashMap<String,String>();
 
         // Test directory instead of Drive letter
         String originalLocation = "C:\\users\\ferna\\Desktop\\Switch MicroSD";
         // Edit to add the Nintendo folder
         String nintendoLocation = originalLocation + "\\Nintendo\\Album";
+        // Test directory to receive the folders
+        String destinationLocation = "C:\\users\\ferna\\Desktop\\Switch-a-roo";
 
         System.out.println(originalLocation); // Testing purpose display
 
         FileLister fileLister = new FileLister(nintendoLocation);
-        fileLister.lister();
-//        fileLister.saveGameHash();
-        fileLister.gameNamer();
-        fileLister.printHashList();
+
     }
 
 }
