@@ -22,12 +22,8 @@ public class Main {
         gameRetrieve.savedGameRetriever();
         storedGames = gameRetrieve.getSavedGames();
 
-        FileLister fileLister = new FileLister(nintendoLocation,storedGames);
-
-        boolean booltest = fileLister.hashExists("22A4BDEA5363AAA24F931D5AF2926082");
-        System.out.println(booltest);
-
-
+        CaptureFileLister captureFileLister = new CaptureFileLister(nintendoLocation,storedGames);
+        captureFileLister.lister();
     }
 
 }
