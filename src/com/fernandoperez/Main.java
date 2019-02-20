@@ -24,6 +24,8 @@ public class Main {
 
         System.out.println(storedGames);
 
+        gameRetrieve.setNewGame("hash2","game2");
+
         //FileLister fileLister = new FileLister(nintendoLocation);
 
 
