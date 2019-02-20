@@ -22,11 +22,10 @@ public class Main {
         gameRetrieve.savedGameRetriever();
         storedGames = gameRetrieve.getSavedGames();
 
-        System.out.println(storedGames);
+        FileLister fileLister = new FileLister(nintendoLocation,storedGames);
 
-        gameRetrieve.setNewGame("hash2","game2");
-
-        //FileLister fileLister = new FileLister(nintendoLocation);
+        boolean booltest = fileLister.hashExists("22A4BDEA5363AAA24F931D5AF2926082");
+        System.out.println(booltest);
 
 
     }

@@ -21,8 +21,7 @@ public class FileLister {
         hashMap = gameRetrieve.savedGameRetriever();
     }
 
-
-
-
-
+    public boolean hashExists(String hash) {
+        return savedGames.containsKey(hash);
+    }
 }
