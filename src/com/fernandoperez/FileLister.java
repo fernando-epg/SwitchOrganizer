@@ -7,18 +7,22 @@ import java.util.HashMap;
 public class FileLister {
     private String path;
     private HashMap<String, String> hashMap;
+    private HashMap<String,String> savedGames;
     private GameRetrieve gameRetrieve;
 
-    public FileLister(String path) {
+    public FileLister(String path, HashMap<String,String> savedGames) {
         this.path = path;
+        this.savedGames = savedGames;
         hashMap = new HashMap<>();
         gameRetrieve = new GameRetrieve();
-        gameRetrieveFill();
     }
 
     private void gameRetrieveFill() {
         hashMap = gameRetrieve.savedGameRetriever();
-        System.out.println(hashMap);
     }
+
+
+
+
 
 }

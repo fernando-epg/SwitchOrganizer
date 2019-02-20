@@ -6,7 +6,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        HashMap<String, String> storedGames = new HashMap<>();
+        HashMap<String, String> storedGames;
+
+        GameRetrieve gameRetrieve = new GameRetrieve();
 
         // Test directory instead of Drive letter
         String originalLocation = "C:\\users\\ferna\\Desktop\\Switch MicroSD";
@@ -17,7 +19,13 @@ public class Main {
 
         System.out.println(originalLocation); // Testing purpose display
 
-        FileLister fileLister = new FileLister(nintendoLocation);
+        gameRetrieve.savedGameRetriever();
+        storedGames = gameRetrieve.getSavedGames();
+
+        System.out.println(storedGames);
+
+        //FileLister fileLister = new FileLister(nintendoLocation);
+
 
     }
 

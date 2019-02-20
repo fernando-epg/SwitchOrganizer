@@ -32,4 +32,8 @@ public class GameRetrieve {
         }
         return savedGames;
     }
+
+    public HashMap<String, String> getSavedGames() {
+        return savedGames;
+    }
 }
