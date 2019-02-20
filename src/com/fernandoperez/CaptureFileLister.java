@@ -1,13 +1,11 @@
 package com.fernandoperez;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class CaptureFileLister {
     private String path;
-    private HashMap<String, String> hashMap;
     private HashMap<String,String> savedGames;
     private GameRetrieve gameRetrieve;
 
@@ -17,15 +15,11 @@ public class CaptureFileLister {
         gameRetrieve = new GameRetrieve();
     }
 
-    private void gameRetrieveFill() {
-        hashMap = gameRetrieve.savedGameRetriever();
-    }
-
     private boolean hashExists(String hash) {
         return savedGames.containsKey(hash);
     }
 
-    private void lister(String path) {
+    private void captureLister(String path) {
         File directory = new File(path);
         File[] fList = directory.listFiles();
         String[] filenameSplit;
@@ -36,7 +30,7 @@ public class CaptureFileLister {
         if(fList != null) {
             for(File file : fList) {
                 if(file.isDirectory()) {
-                    lister(file.getAbsolutePath());
+                    captureLister(file.getAbsolutePath());
                 } else if (file.isFile()) {
                     filenameSplit = file.getName().split("-");
                     hashSplit = filenameSplit[1].split("\\.");
@@ -45,6 +39,7 @@ public class CaptureFileLister {
                         System.out.println("Game not found. Please enter Game's title:");
                         String gameName = scanner.nextLine();
                         gameRetrieve.setNewGame(hashSplit[0],gameName);
+                        savedGames.put(hashSplit[0],gameName);
                     }
                 }
             }
@@ -54,6 +49,6 @@ public class CaptureFileLister {
     }
 
     public void lister() {
-        lister(this.path);
+        captureLister(this.path);
     }
 }
