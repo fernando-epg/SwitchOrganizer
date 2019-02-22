@@ -3,7 +3,6 @@ package com.fernandoperez;
 
 import java.io.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 public class GameRetrieve {
@@ -88,5 +87,9 @@ public class GameRetrieve {
      */
     public String getTitle(String hash) {
         return savedGames.get(hash);
+    }
+
+    public boolean hashExists(String hash) {
+        return savedGames.containsKey(hash);
     }
 }

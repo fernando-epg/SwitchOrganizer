@@ -13,6 +13,9 @@ public class CaptureFileLister {
      * path Directory path where the captures begin.
      * savedGames Hash Map where the saved games from a file is stored.
      * gameRetrieve Object to save new games for external file
+     *
+     * TODO Option to delete original files
+     *
      */
     private String path;
     private HashMap<String,String> savedGames;
@@ -30,7 +33,7 @@ public class CaptureFileLister {
      * @param hash hash code of the game
      * @return boolean if the hash code exists.
      */
-    private boolean hashExists(String hash) {
+    public boolean hashExists(String hash) {
         return savedGames.containsKey(hash);
     }
 
@@ -58,6 +61,7 @@ public class CaptureFileLister {
 
                     if(!hashExists(hashSplit[0])) {
                         System.out.println("Game not found. Please enter Game's title:");
+                        System.out.println("Reference: " + file.getAbsolutePath());
                         String gameName = scanner.nextLine();
                         gameRetrieve.setNewGame(hashSplit[0],gameName);
                         savedGames.put(hashSplit[0],gameName);

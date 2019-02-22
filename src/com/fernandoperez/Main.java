@@ -10,14 +10,12 @@ public class Main {
      * Program intended to organize the captures done from the Nintendo Switch
      * to be organized in the computer based on Game title.
      *
-     * TODO LIST (No particular order)
-     * - Create folders on output directory
-     * - Copy games
-     * - Get output directory
-     * - Get original directory
-     * - Verify that the folder is already created
-     * - Option to delete original files
-     * - Retrieve game's title
+     * TODO Create folders on output directory
+     * TODO Copy captures
+     * TODO Get output directory
+     * TODO Get original drive
+     * TODO Verify that the folder is already created
+     * TODO Language packages
      */
     public static void main(String[] args) {
 
@@ -39,6 +37,10 @@ public class Main {
 
         CaptureFileLister captureFileLister = new CaptureFileLister(nintendoLocation,storedGames);
         captureFileLister.lister();
+
+        DiskWriter diskWriter = new DiskWriter(originalLocation,destinationLocation,captureFileLister,gameRetrieve);
+        diskWriter.copier();
+
     }
 
 }
