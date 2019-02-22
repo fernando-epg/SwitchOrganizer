@@ -10,3 +10,5 @@ HashListCSV\.csv
 *.kotlin_module
 
 *.iml
+
+*.txt

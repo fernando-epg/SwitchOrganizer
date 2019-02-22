@@ -13,6 +13,9 @@ public class Main {
      * TODO Get output directory
      * TODO Get original drive
      * TODO Language packages
+     * TODO Save configuration
+     * TODO Ask target game dummp
+     * TODO Ask if move or copy
      */
     public static void main(String[] args) {
 
