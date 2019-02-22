@@ -39,7 +39,7 @@ public class DiskWriter {
         File directory = new File(fullPath);
 
         if(!directory.exists()) {
-            directory.mkdir();
+            boolean result = directory.mkdir();
         }
     }
 
@@ -75,7 +75,7 @@ public class DiskWriter {
                         try {
                             Files.copy(originPath,targetFile);
                         } catch (FileAlreadyExistsException ex) {
-                            System.err.format("File already exists");
+                            System.err.format(file.getName() + " already exists\n");
                         } catch (IOException ex) {
                             System.err.format("I/O error while copying file");
                         }

@@ -38,7 +38,7 @@ public class Main {
         CaptureFileLister captureFileLister = new CaptureFileLister(nintendoLocation,storedGames);
         captureFileLister.lister();
 
-        DiskWriter diskWriter = new DiskWriter(originalLocation,destinationLocation,captureFileLister,gameRetrieve);
+        DiskWriter diskWriter = new DiskWriter(nintendoLocation,destinationLocation,captureFileLister,gameRetrieve);
         diskWriter.copier();
 
     }
