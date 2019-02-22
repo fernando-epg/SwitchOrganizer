@@ -13,6 +13,8 @@ public class DiskWriter {
      * Class to handle the disk writing operations
      *
      * path Path where the directories will be stored.
+     *
+     * TODO Option to delete original files
      */
     private String originPath;
     private String newPath;

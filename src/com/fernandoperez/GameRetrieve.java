@@ -14,6 +14,8 @@ public class GameRetrieve {
      * hashFile File object to handle the stored file.
      * fileScan Scanner to read the file.
      * savedGames Hash Map to store the hash code and the game's title.
+     *
+     * TODO File creation
      */
     private String hashPath = "./HashListCSV.csv"; //This might change for an option. Still thinking.
     private File hashFile;
