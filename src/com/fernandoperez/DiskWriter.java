@@ -74,12 +74,14 @@ public class DiskWriter {
                         Path targetDir = Paths.get(newPath + "\\" + title);
                         Path targetFile = targetDir.resolve(file.getName());
 
-                        try {
-                            Files.copy(originPath,targetFile);
-                        } catch (FileAlreadyExistsException ex) {
-                            System.err.format(file.getName() + " already exists\n");
-                        } catch (IOException ex) {
-                            System.err.format("I/O error while copying file");
+                        if (!new File(targetFile.toString()).exists()) {
+                            try {
+                                Files.copy(originPath,targetFile);
+                            } catch (FileAlreadyExistsException ex) {
+                                System.err.format(file.getName() + " already exists\n");
+                            } catch (IOException ex) {
+                                System.err.format("I/O error while copying file");
+                            }
                         }
                     }
 

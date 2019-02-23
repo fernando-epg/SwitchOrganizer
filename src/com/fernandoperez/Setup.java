@@ -10,21 +10,28 @@ import java.util.Scanner;
  *
  * @author jumbonionga@gmail.com
  */
-@SuppressWarnings("LoopStatementThatDoesntLoop")
 public class Setup {
 
     private Scanner scanner;
+    private Properties prop;
     public Setup() {
         scanner = new Scanner(System.in);
+        prop = new Properties();
+        if((new File("./configuration.cfg")).exists()) {
+            try {
+                InputStream inputStream = new FileInputStream(new File("./configuration.cfg"));
+                prop.load(inputStream);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
      * setOriginalDirectory
      * Retrieves the original directory where the Nintendo folder is located.
-     *
-     * @return Drive or folder where Nintendo folder should be
      */
-    public String setOriginalDirectory() {
+    public void setOriginalDirectory() {
         String originalDirectory;
         File originalDestination;
 
@@ -34,21 +41,18 @@ public class Setup {
             originalDirectory = scanner.nextLine();
             originalDestination = new File(originalDirectory + "\\Nintendo");
             if(originalDestination.exists()) {
-                return originalDirectory;
+                setProperty("originalLocation",originalDirectory);
             } else {
                 System.out.println("Nintendo folder could't be found. Please check");
-                return "";
             }
         } while (originalDestination == null);
     }
 
     /**
      * setDestinationDirectory
-     * Retrieve the destination folder, or create it if possible, if it doesn't exist.
-     *
-     * @return Drive or folder where the dump will be performed.
+     * Set the destination folder, or create it if possible, if it doesn't exist.
      */
-    public String setDestinationDirectory() {
+    public void setDestinationDirectory() {
         String destinationDirectory;
         File dumpDestination;
 
@@ -57,21 +61,23 @@ public class Setup {
             destinationDirectory = scanner.nextLine();
             dumpDestination = new File(destinationDirectory);
             if(dumpDestination.exists()) {
-                return destinationDirectory;
+                setProperty("destinationLocation",destinationDirectory);
             } else {
                 boolean createdDirectory = dumpDestination.mkdir();
                 if (createdDirectory) {
                     System.out.println("Directory not found. It was created");
-                    return destinationDirectory;
                 } else {
                     System.out.println("Unable to find nor create directory. Please check");
                 }
-                return "";
             }
         } while(dumpDestination == null);
     }
 
-    public String setSavedGamesDirectory() {
+    /**
+     * setSavedGamesDirectory
+     * Set directory and filename for owned games
+     */
+    public void setSavedGamesDirectory() {
         String savedGamesDirectory;
         File savedGamesDestination;
 
@@ -83,20 +89,18 @@ public class Setup {
             savedGamesDirectory = ownedGamesDirectory + "\\" + ownedGamesFileName + ".csv";
             savedGamesDestination = new File(savedGamesDirectory);
             if(savedGamesDestination.exists()) {
-                return savedGamesDirectory;
+                setProperty("savedGamesLocation",savedGamesDirectory);
             } else {
                 try {
                     boolean createFile = savedGamesDestination.createNewFile();
                     if(createFile) {
                         System.out.println("File didn't exist, but it was created.");
-                        return savedGamesDirectory;
                     } else {
                         System.out.println("File couldn't be found nor created");
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                return "";
             }
         } while(savedGamesDestination == null);
     }
@@ -110,38 +114,25 @@ public class Setup {
         File configFile = new File(configLocation);
 
         if(!configFile.exists() || configFile.length() == 0) {
-            // PROPERTIES TO SAVE
-            String originalLocation = "";
-            String nintendoLocation;
-            String destinationLocation = "";
-            String savedGamesLocation = "";
-
-            Properties prop = new Properties();
-
-            while(originalLocation.equals("")) {
-                originalLocation = setOriginalDirectory();
-            }
-
-            nintendoLocation = originalLocation + "\\Nintendo\\Album";
-
-            while(destinationLocation.equals("")) {
-                destinationLocation = setDestinationDirectory();
-            }
-
-            while(savedGamesLocation.equals("")) {
-                savedGamesLocation = setSavedGamesDirectory();
-            }
-
-            prop.setProperty("originalLocation",originalLocation);
-            prop.setProperty("nintendoLocation",nintendoLocation);
-            prop.setProperty("destinationLocation",destinationLocation);
-            prop.setProperty("savedGamesLocation",savedGamesLocation);
-
-            try {
-                prop.store(new FileOutputStream(configLocation),null);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            setOriginalDirectory();
+            String nintendoLocation = getProperty("originalLocation") + "Nintendo\\Album";
+            setProperty("nintendoLocation",nintendoLocation);
+            setDestinationDirectory();
+            setSavedGamesDirectory();
         }
+    }
+
+    private void setProperty(String property, String value) {
+        prop.setProperty(property,value);
+        try {
+            prop.store(new FileOutputStream("./configuration.cfg"),null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getProperty(String property) {
+
+        return prop.getProperty(property);
     }
 }
