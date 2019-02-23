@@ -35,17 +35,15 @@ public class Setup {
         String originalDirectory;
         File originalDestination;
 
-        do {
-            System.out.println("Please enter the original source of the Nintendo folder.");
-            System.out.println("For drives, please follow this example: \"C:\\\" (without \")");
-            originalDirectory = scanner.nextLine();
-            originalDestination = new File(originalDirectory + "\\Nintendo");
-            if(originalDestination.exists()) {
-                setProperty("originalLocation",originalDirectory);
-            } else {
-                System.out.println("Nintendo folder could't be found. Please check");
-            }
-        } while (originalDestination == null);
+        System.out.println("Please enter the original source of the Nintendo folder.");
+        System.out.println("For drives, please follow this example: \"C:\\\" (without \")");
+        originalDirectory = scanner.nextLine();
+        originalDestination = new File(originalDirectory + "\\Nintendo");
+        if(originalDestination.exists()) {
+            setProperty("originalLocation",originalDirectory);
+        } else {
+            System.out.println("Nintendo folder could't be found. Please check");
+        }
     }
 
     /**
@@ -56,21 +54,19 @@ public class Setup {
         String destinationDirectory;
         File dumpDestination;
 
-        do {
-            System.out.println("Please enter the destination folder where the files will be organized");
-            destinationDirectory = scanner.nextLine();
-            dumpDestination = new File(destinationDirectory);
-            if(dumpDestination.exists()) {
-                setProperty("destinationLocation",destinationDirectory);
+        System.out.println("Please enter the destination folder where the files will be organized");
+        destinationDirectory = scanner.nextLine();
+        dumpDestination = new File(destinationDirectory);
+        if(dumpDestination.exists()) {
+            setProperty("destinationLocation",destinationDirectory);
+        } else {
+            boolean createdDirectory = dumpDestination.mkdir();
+            if (createdDirectory) {
+                System.out.println("Directory not found. It was created");
             } else {
-                boolean createdDirectory = dumpDestination.mkdir();
-                if (createdDirectory) {
-                    System.out.println("Directory not found. It was created");
-                } else {
-                    System.out.println("Unable to find nor create directory. Please check");
-                }
+                System.out.println("Unable to find nor create directory. Please check");
             }
-        } while(dumpDestination == null);
+        }
     }
 
     /**
@@ -81,28 +77,26 @@ public class Setup {
         String savedGamesDirectory;
         File savedGamesDestination;
 
-        do {
-            System.out.println("Please enter the destination to save your owned games");
-            String ownedGamesDirectory = scanner.nextLine();
-            System.out.println("How would you like to name the file?");
-            String ownedGamesFileName = scanner.nextLine();
-            savedGamesDirectory = ownedGamesDirectory + "\\" + ownedGamesFileName + ".csv";
-            savedGamesDestination = new File(savedGamesDirectory);
-            if(savedGamesDestination.exists()) {
-                setProperty("savedGamesLocation",savedGamesDirectory);
-            } else {
-                try {
-                    boolean createFile = savedGamesDestination.createNewFile();
-                    if(createFile) {
-                        System.out.println("File didn't exist, but it was created.");
-                    } else {
-                        System.out.println("File couldn't be found nor created");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
+        System.out.println("Please enter the destination to save your owned games");
+        String ownedGamesDirectory = scanner.nextLine();
+        System.out.println("How would you like to name the file?");
+        String ownedGamesFileName = scanner.nextLine();
+        savedGamesDirectory = ownedGamesDirectory + "\\" + ownedGamesFileName + ".csv";
+        savedGamesDestination = new File(savedGamesDirectory);
+        if(savedGamesDestination.exists()) {
+            setProperty("savedGamesLocation",savedGamesDirectory);
+        } else {
+            try {
+                boolean createFile = savedGamesDestination.createNewFile();
+                if(createFile) {
+                    System.out.println("File didn't exist, but it was created.");
+                } else {
+                    System.out.println("File couldn't be found nor created");
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } while(savedGamesDestination == null);
+        }
     }
 
     /**
