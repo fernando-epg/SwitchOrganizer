@@ -29,13 +29,17 @@ public class Main {
 
         String nintendoLocation = originalLocation + "\\Nintendo\\Album";
 
+        String destinationLocation = "";
+        while(destinationLocation.equals("")) {
+            destinationLocation = setup.getDestinationDirectory();
+        }
 
 
         // Test directory instead of Drive letter
 //        String originalLocation = "C:\\users\\ferna\\Desktop\\Switch MicroSD";
 
         // Test directory to receive the folders
-        String destinationLocation = "C:\\users\\ferna\\Desktop\\Switch-a-roo";
+//        String destinationLocation = "C:\\users\\ferna\\Desktop\\Switch-a-roo";
 
         GameRetrieve gameRetrieve = new GameRetrieve();
         gameRetrieve.savedGameRetriever();
