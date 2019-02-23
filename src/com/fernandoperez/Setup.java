@@ -1,7 +1,7 @@
 package com.fernandoperez;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.Properties;
 import java.util.Scanner;
 
 /**
@@ -99,5 +99,45 @@ public class Setup {
                 return "";
             }
         } while(savedGamesDestination == null);
+    }
+
+    public void initialSetup () {
+        String configLocation = "./configuration.cfg";
+        File configFile = new File(configLocation);
+
+        if(!configFile.exists() || configFile.length() == 0) {
+            // PROPERTIES TO SAVE
+            String originalLocation = "";
+            String nintendoLocation = "";
+            String destinationLocation = "";
+            String savedGamesLocation = "";
+
+            Properties prop = new Properties();
+
+            while(originalLocation.equals("")) {
+                originalLocation = getOriginalDirectory();
+            }
+
+            nintendoLocation = originalLocation + "\\Nintendo\\Album";
+
+            while(destinationLocation.equals("")) {
+                destinationLocation = getDestinationDirectory();
+            }
+
+            while(savedGamesLocation.equals("")) {
+                savedGamesLocation = getSavedGamesDirectory();
+            }
+
+            prop.setProperty("originalLocation",originalLocation);
+            prop.setProperty("nintendoLocation",nintendoLocation);
+            prop.setProperty("destinationLocation",destinationLocation);
+            prop.setProperty("savedGamesLocation",savedGamesLocation);
+
+            try {
+                prop.store(new FileOutputStream(configLocation),null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

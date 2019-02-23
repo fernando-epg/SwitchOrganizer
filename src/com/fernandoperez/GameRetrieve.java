@@ -17,13 +17,14 @@ public class GameRetrieve {
      *
      * TODO File creation
      */
-    private String hashPath = "./HashListCSV.csv"; //This might change for an option. Still thinking.
+    private String hashPath; /*"./HashListCSV.csv";*/ //This might change for an option. Still thinking.
     private File hashFile;
     private Scanner fileScan;
     private HashMap<String, String> savedGames;
 
-    public GameRetrieve() {
-        savedGames = new HashMap<>();
+    public GameRetrieve(String hashPath) {
+        this.savedGames = new HashMap<>();
+        this.hashPath = hashPath;
     }
 
     /**
@@ -72,7 +73,10 @@ public class GameRetrieve {
             file = new File(hashPath);
             writer = new BufferedWriter(new FileWriter(file,true));
 
-            writer.newLine();
+            if(file.length() != 0) {
+                writer.newLine();
+            }
+
             writer.write(hash + "," + name);
 
             writer.close();

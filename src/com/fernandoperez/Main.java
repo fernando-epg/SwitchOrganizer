@@ -10,8 +10,6 @@ public class Main {
      * Program intended to organize the captures done from the Nintendo Switch
      * to be organized in the computer based on Game title.
      *
-     * TODO Get output directory
-     * TODO Get original drive
      * TODO Language packages
      * TODO Save configuration
      * TODO Ask target game dump
@@ -22,22 +20,9 @@ public class Main {
         HashMap<String, String> storedGames;
 
         Setup setup = new Setup();
-        String originalLocation = "";
-        /*while(originalLocation.equals("")) {
-            originalLocation = setup.getOriginalDirectory();
-        }*/
+        setup.initialSetup();
 
-        String nintendoLocation = originalLocation + "\\Nintendo\\Album";
 
-        String destinationLocation = "";
-        /*while(destinationLocation.equals("")) {
-            destinationLocation = setup.getDestinationDirectory();
-        }*/
-
-        String savedGamesLocation = "";
-        while(savedGamesLocation.equals("")) {
-            savedGamesLocation = setup.getSavedGamesDirectory();
-        }
 
         // Test directory instead of Drive letter
 //        String originalLocation = "C:\\users\\ferna\\Desktop\\Switch MicroSD";
