@@ -1,8 +1,6 @@
 
 package com.fernandoperez;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -15,8 +13,6 @@ public class Main {
      * to be organized in the computer based on Game title.
      *
      * TODO Language packages
-     * TODO Save configuration
-     * TODO Ask target game dump
      * TODO Ask if move or copy
      */
     public static void main(String[] args) {
