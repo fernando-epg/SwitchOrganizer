@@ -12,3 +12,5 @@ HashListCSV\.csv
 *.iml
 
 *.txt
+
+configuration\.cfg

@@ -19,12 +19,12 @@ public class Setup {
     }
 
     /**
-     * getOriginalDirectory
+     * setOriginalDirectory
      * Retrieves the original directory where the Nintendo folder is located.
      *
      * @return Drive or folder where Nintendo folder should be
      */
-    public String getOriginalDirectory() {
+    public String setOriginalDirectory() {
         String originalDirectory;
         File originalDestination;
 
@@ -43,12 +43,12 @@ public class Setup {
     }
 
     /**
-     * getDestinationDirectory
+     * setDestinationDirectory
      * Retrieve the destination folder, or create it if possible, if it doesn't exist.
      *
      * @return Drive or folder where the dump will be performed.
      */
-    public String getDestinationDirectory() {
+    public String setDestinationDirectory() {
         String destinationDirectory;
         File dumpDestination;
 
@@ -71,7 +71,7 @@ public class Setup {
         } while(dumpDestination == null);
     }
 
-    public String getSavedGamesDirectory() {
+    public String setSavedGamesDirectory() {
         String savedGamesDirectory;
         File savedGamesDestination;
 
@@ -101,6 +101,10 @@ public class Setup {
         } while(savedGamesDestination == null);
     }
 
+    /**
+     * initialSetup()
+     * Property initializer for future references.
+     */
     public void initialSetup () {
         String configLocation = "./configuration.cfg";
         File configFile = new File(configLocation);
@@ -108,24 +112,24 @@ public class Setup {
         if(!configFile.exists() || configFile.length() == 0) {
             // PROPERTIES TO SAVE
             String originalLocation = "";
-            String nintendoLocation = "";
+            String nintendoLocation;
             String destinationLocation = "";
             String savedGamesLocation = "";
 
             Properties prop = new Properties();
 
             while(originalLocation.equals("")) {
-                originalLocation = getOriginalDirectory();
+                originalLocation = setOriginalDirectory();
             }
 
             nintendoLocation = originalLocation + "\\Nintendo\\Album";
 
             while(destinationLocation.equals("")) {
-                destinationLocation = getDestinationDirectory();
+                destinationLocation = setDestinationDirectory();
             }
 
             while(savedGamesLocation.equals("")) {
-                savedGamesLocation = getSavedGamesDirectory();
+                savedGamesLocation = setSavedGamesDirectory();
             }
 
             prop.setProperty("originalLocation",originalLocation);

@@ -20,11 +20,12 @@ public class CaptureFileLister {
     private String path;
     private HashMap<String,String> savedGames;
     private GameRetrieve gameRetrieve;
+    private Config config = new Config();
 
     public CaptureFileLister(String path, HashMap<String,String> savedGames) {
         this.path = path;
         this.savedGames = savedGames;
-        gameRetrieve = new GameRetrieve();
+        gameRetrieve = new GameRetrieve(config.getProperty("savedGamesLocation"));
     }
 
     /**

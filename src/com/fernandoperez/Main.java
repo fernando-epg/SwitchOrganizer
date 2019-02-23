@@ -21,24 +21,23 @@ public class Main {
 
         Setup setup = new Setup();
         setup.initialSetup();
+        Config config = new Config();
 
 
-
-        // Test directory instead of Drive letter
-//        String originalLocation = "C:\\users\\ferna\\Desktop\\Switch MicroSD";
-
-        // Test directory to receive the folders
-//        String destinationLocation = "C:\\users\\ferna\\Desktop\\Switch-a-roo";
-
-        GameRetrieve gameRetrieve = new GameRetrieve();
+        GameRetrieve gameRetrieve = new GameRetrieve(config.getProperty("savedGamesLocation"));
         gameRetrieve.savedGameRetriever();
         storedGames = gameRetrieve.getSavedGames();
+        System.out.println("All games have been identified");
 
-        CaptureFileLister captureFileLister = new CaptureFileLister(nintendoLocation,storedGames);
+        CaptureFileLister captureFileLister = new CaptureFileLister(config.getProperty("nintendoLocation"),storedGames);
         captureFileLister.lister();
+        System.out.println("All capture files have been listed");
 
-        DiskWriter diskWriter = new DiskWriter(nintendoLocation,destinationLocation,captureFileLister,gameRetrieve);
+        DiskWriter diskWriter = new DiskWriter(config.getProperty("nintendoLocation"),
+                                               config.getProperty("destinationLocation"),
+                                               captureFileLister,gameRetrieve);
         diskWriter.copier();
+        System.out.println("All captures have been organized");
     }
 
 }
