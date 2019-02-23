@@ -1,6 +1,7 @@
 package com.fernandoperez;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -63,10 +64,40 @@ public class Setup {
                     System.out.println("Directory not found. It was created");
                     return destinationDirectory;
                 } else {
-                    System.out.println("Unable to create directory. Please check");
+                    System.out.println("Unable to find nor create directory. Please check");
                 }
                 return "";
             }
         } while(dumpDestination == null);
+    }
+
+    public String getSavedGamesDirectory() {
+        String savedGamesDirectory;
+        File savedGamesDestination;
+
+        do {
+            System.out.println("Please enter the destination to save your owned games");
+            String ownedGamesDirectory = scanner.nextLine();
+            System.out.println("How would you like to name the file?");
+            String ownedGamesFileName = scanner.nextLine();
+            savedGamesDirectory = ownedGamesDirectory + "\\" + ownedGamesFileName + ".csv";
+            savedGamesDestination = new File(savedGamesDirectory);
+            if(savedGamesDestination.exists()) {
+                return savedGamesDirectory;
+            } else {
+                try {
+                    boolean createFile = savedGamesDestination.createNewFile();
+                    if(createFile) {
+                        System.out.println("File didn't exist, but it was created.");
+                        return savedGamesDirectory;
+                    } else {
+                        System.out.println("File couldn't be found nor created");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return "";
+            }
+        } while(savedGamesDestination == null);
     }
 }

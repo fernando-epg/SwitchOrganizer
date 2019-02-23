@@ -23,17 +23,21 @@ public class Main {
 
         Setup setup = new Setup();
         String originalLocation = "";
-        while(originalLocation.equals("")) {
+        /*while(originalLocation.equals("")) {
             originalLocation = setup.getOriginalDirectory();
-        }
+        }*/
 
         String nintendoLocation = originalLocation + "\\Nintendo\\Album";
 
         String destinationLocation = "";
-        while(destinationLocation.equals("")) {
+        /*while(destinationLocation.equals("")) {
             destinationLocation = setup.getDestinationDirectory();
-        }
+        }*/
 
+        String savedGamesLocation = "";
+        while(savedGamesLocation.equals("")) {
+            savedGamesLocation = setup.getSavedGamesDirectory();
+        }
 
         // Test directory instead of Drive letter
 //        String originalLocation = "C:\\users\\ferna\\Desktop\\Switch MicroSD";
