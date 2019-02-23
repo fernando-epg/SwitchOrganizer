@@ -14,24 +14,30 @@ public class Main {
      * TODO Get original drive
      * TODO Language packages
      * TODO Save configuration
-     * TODO Ask target game dummp
+     * TODO Ask target game dump
      * TODO Ask if move or copy
      */
     public static void main(String[] args) {
 
         HashMap<String, String> storedGames;
 
-        GameRetrieve gameRetrieve = new GameRetrieve();
+        Setup setup = new Setup();
+        String originalLocation = "";
+        while(originalLocation.equals("")) {
+            originalLocation = setup.getOriginalDirectory();
+        }
+
+        String nintendoLocation = originalLocation + "\\Nintendo\\Album";
+
+
 
         // Test directory instead of Drive letter
-        String originalLocation = "C:\\users\\ferna\\Desktop\\Switch MicroSD";
-        // Edit to add the Nintendo folder
-        String nintendoLocation = originalLocation + "\\Nintendo\\Album";
+//        String originalLocation = "C:\\users\\ferna\\Desktop\\Switch MicroSD";
+
         // Test directory to receive the folders
         String destinationLocation = "C:\\users\\ferna\\Desktop\\Switch-a-roo";
 
-        System.out.println(originalLocation); // Testing purpose display
-
+        GameRetrieve gameRetrieve = new GameRetrieve();
         gameRetrieve.savedGameRetriever();
         storedGames = gameRetrieve.getSavedGames();
 
@@ -40,7 +46,6 @@ public class Main {
 
         DiskWriter diskWriter = new DiskWriter(nintendoLocation,destinationLocation,captureFileLister,gameRetrieve);
         diskWriter.copier();
-
     }
 
 }
