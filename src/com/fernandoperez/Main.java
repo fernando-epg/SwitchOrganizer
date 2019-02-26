@@ -74,9 +74,12 @@ public class Main {
      * Presentation and show options.
      */
     private static void menu() {
+        Setup setup = new Setup();
         System.out.println("SWITCH CAPTURE ORGANIZER");
         System.out.println("Organize the captures on your Switch's MicroSD or Directory based on game");
         System.out.println("Please select the option you wish to run:");
+        System.out.println("Current source: " + setup.getProperty("originalLocation"));
+        System.out.println("Current destination: " + setup.getProperty("destinationLocation"));
         System.out.println("1 - Organize");
         System.out.println("2 - Change settings");
     }
