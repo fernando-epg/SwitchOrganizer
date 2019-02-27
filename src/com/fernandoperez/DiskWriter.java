@@ -12,7 +12,10 @@ public class DiskWriter {
      * DiskWriter
      * Class to handle the disk writing operations
      *
-     * path Path where the directories will be stored.
+     * originPath path where the captures are originally stored.
+     * newPath path where the captures will be stored.
+     * captureFileLister object where the capture files have been identified.
+     * gameRetrieve object that handles the games that have been historically identified.
      *
      * TODO Option to delete original files
      */
@@ -90,6 +93,11 @@ public class DiskWriter {
         }
     }
 
+    /**
+     * copier()
+     *
+     * Public facing method for fileCopier().
+     */
     public void copier() {
         fileCopier(this.originPath);
     }
