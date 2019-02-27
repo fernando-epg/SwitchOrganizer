@@ -14,3 +14,7 @@ HashListCSV\.csv
 *.txt
 
 configuration\.cfg
+
+out/
+
+*.mf
