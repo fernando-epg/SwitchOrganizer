@@ -65,7 +65,8 @@ public class Main {
         DiskWriter diskWriter = new DiskWriter(setup.getProperty("nintendoLocation"),
                 setup.getProperty("destinationLocation"),
                 captureFileLister,gameRetrieve);
-        diskWriter.copier();
+        //diskWriter.copier();
+        diskWriter.streamCopy();
         System.out.println("All captures have been organized");
     }
 
