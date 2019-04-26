@@ -1,7 +1,9 @@
 
 package com.fernandoperez;
 
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -63,6 +65,11 @@ public class CaptureFileLister {
                     if(!hashExists(hashSplit[0])) {
                         System.out.println("Game not found. Please enter Game's title:");
                         System.out.println("Reference: " + file.getAbsolutePath());
+                        try {
+                            Desktop.getDesktop().open(file);
+                        } catch (IOException e) {
+                            System.err.format("Unable to open sample file");
+                        }
                         String gameName = scanner.nextLine();
                         gameRetrieve.setNewGame(hashSplit[0],gameName);
                         savedGames.put(hashSplit[0],gameName);

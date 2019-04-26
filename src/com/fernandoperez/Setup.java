@@ -90,6 +90,7 @@ public class Setup {
                 boolean createFile = savedGamesDestination.createNewFile();
                 if(createFile) {
                     System.out.println("File didn't exist, but it was created.");
+                    setProperty("savedGamesLocation",savedGamesDirectory);
                 } else {
                     System.out.println("File couldn't be found nor created");
                 }
@@ -109,7 +110,7 @@ public class Setup {
 
         if(!configFile.exists() || configFile.length() == 0) {
             setOriginalDirectory();
-            String nintendoLocation = getProperty("originalLocation") + "Nintendo\\Album";
+            String nintendoLocation = getProperty("originalLocation") + "\\Nintendo\\Album";
             setProperty("nintendoLocation",nintendoLocation);
             setDestinationDirectory();
             setSavedGamesDirectory();
