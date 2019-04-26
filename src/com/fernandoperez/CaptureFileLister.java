@@ -65,6 +65,7 @@ public class CaptureFileLister {
                     if(!hashExists(hashSplit[0])) {
                         System.out.println("Game not found. Please enter Game's title:");
                         System.out.println("Reference: " + file.getAbsolutePath());
+
                         try {
                             Desktop.getDesktop().open(file);
                         } catch (IOException e) {
