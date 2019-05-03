@@ -43,7 +43,7 @@ public class DiskWriter {
      * @param gameTitle Game's title to create folder.
      */
     private void createFolder(String gameTitle) {
-        String fullPath = newPath + new Setup().osModifier() + gameTitle;
+        String fullPath = newPath + System.getProperty("file.separator") + gameTitle;
 
         File directory = new File(fullPath);
 
@@ -78,7 +78,7 @@ public class DiskWriter {
                     if(captureFileLister.hashExists(hashSplit[0])) {
                         String title = gameRetrieve.getTitle(hashSplit[0]);
                         createFolder(title);
-                        Path targetDir = Paths.get(newPath + new Setup().osModifier() + title);
+                        Path targetDir = Paths.get(newPath + System.getProperty("file.separator") + title);
                         Path targetFile = targetDir.resolve(file.getName());
 
                         if (!new File(targetFile.toString()).exists()) {
@@ -143,12 +143,10 @@ public class DiskWriter {
             hashSplit = filenameSplit[1].split("\\.");
             //Path originPath = Paths.get(path);
 
-
-            String osModifier = new Setup().osModifier();
             if(captureFileLister.hashExists(hashSplit[0])) {
                 String title = gameRetrieve.getTitle(hashSplit[0]);
                 createFolder(title);
-                Path targetDir = Paths.get(newPath + "/" + title);
+                Path targetDir = Paths.get(newPath + System.getProperty("file.separator") + title);
                 Path targetFile = targetDir.resolve(file.getName());
 
                 if(!new File(targetFile.toString()).exists()) {

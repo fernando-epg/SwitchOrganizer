@@ -101,7 +101,8 @@ public class Main {
                 option = scanner.nextInt();
                 scanner.nextLine();
             } catch (InputMismatchException e) {
-                System.out.println("Please enter a correct value");
+                System.out.println("Please enter a correct value\n");
+                scanner.nextLine();
                 option = 0;
             }
         }

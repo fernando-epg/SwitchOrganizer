@@ -40,7 +40,7 @@ public class Setup {
         System.out.println("Please enter the original source of the Nintendo folder.");
         System.out.println("For drives, please follow this example: \"C:\\\" (without \")");
         originalDirectory = scanner.nextLine();
-        originalDestination = new File(originalDirectory + osModifier() + "Nintendo");
+        originalDestination = new File(originalDirectory + System.getProperty("file.separator") + "Nintendo");
 
         if (originalDestination.exists()) {
             setProperty("originalLocation", originalDirectory);
@@ -84,7 +84,7 @@ public class Setup {
         String ownedGamesDirectory = scanner.nextLine();
         System.out.println("How would you like to name the file?");
         String ownedGamesFileName = scanner.nextLine();
-        savedGamesDirectory = ownedGamesDirectory + osModifier() + ownedGamesFileName + ".csv";
+        savedGamesDirectory = ownedGamesDirectory + System.getProperty("file.separator") + ownedGamesFileName + ".csv";
         savedGamesDestination = new File(savedGamesDirectory);
         if (savedGamesDestination.exists()) {
             setProperty("savedGamesLocation", savedGamesDirectory);
@@ -113,10 +113,6 @@ public class Setup {
 
         while (!fullProperties()) {
             String os = null;
-            if (getProperty("OS") == null) {
-                os = System.getProperty("sun.desktop");
-                setProperty("OS", os);
-            }
 
             if (getProperty("originalLocation") == null) {
                 setOriginalDirectory();
@@ -124,7 +120,7 @@ public class Setup {
 
             if (getProperty("nintendoLocation") == null) {
                 String originalLocation = getProperty("originalLocation");
-                String nintendoLocation = originalLocation + osModifier() + "Nintendo";
+                String nintendoLocation = originalLocation + System.getProperty("file.separator") + "Nintendo";
                 setProperty("nintendoLocation", nintendoLocation);
             }
 
@@ -169,26 +165,9 @@ public class Setup {
         return prop.getProperty(property);
     }
 
-    /**
-     * osModifier
-     * <p>
-     * Extends directory modifications based on the OS presented in System.getProperty("sun.desktop")
-     *
-     * @return directory path modifier
-     */
-    public String osModifier() {
-        String os = getProperty("OS");
-        switch (os) {
-            case "gnome":
-                return "/";
-            case "windows":
-                return "\\";
-        }
-        return "";
-    }
 
     private boolean fullProperties() {
-        return getProperty("OS") != null && getProperty("nintendoLocation") != null &&
+        return getProperty("nintendoLocation") != null &&
                 getProperty("originalLocation") != null && getProperty("destinationLocation") != null &&
                 getProperty("savedGamesLocation") != null;
     }
