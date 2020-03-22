@@ -39,11 +39,13 @@ public class Setup {
 
         System.out.println("Please enter the original source of the Nintendo folder.");
         System.out.println("For drives, please follow this example: \"C:\\\" (without \")");
+        currentDirectory("source","originalLocation");
         originalDirectory = scanner.nextLine();
-        originalDestination = new File(originalDirectory + System.getProperty("file.separator") + "Nintendo");
+        originalDestination = new File(originalDirectory + System.getProperty("file.separator") + "Nintendo\\Album");
 
         if (originalDestination.exists()) {
             setProperty("originalLocation", originalDirectory);
+            setProperty("nintendoLocation",originalDestination.getAbsolutePath());
         } else {
             System.out.println("Nintendo folder could't be found. Please check");
         }
@@ -58,6 +60,8 @@ public class Setup {
         File dumpDestination;
 
         System.out.println("Please enter the destination folder where the files will be organized");
+        currentDirectory("destination","destinationLocation");
+
         destinationDirectory = scanner.nextLine();
         dumpDestination = new File(destinationDirectory);
         if (dumpDestination.exists()) {
@@ -80,7 +84,8 @@ public class Setup {
         String savedGamesDirectory;
         File savedGamesDestination;
 
-        System.out.println("Please enter the destination to save your owned games");
+        System.out.println("Please enter the destination to save your owned games list");
+        currentDirectory("saved list","savedGamesLocation");
         String ownedGamesDirectory = scanner.nextLine();
         System.out.println("How would you like to name the file?");
         String ownedGamesFileName = scanner.nextLine();
@@ -171,4 +176,18 @@ public class Setup {
                 getProperty("originalLocation") != null && getProperty("destinationLocation") != null &&
                 getProperty("savedGamesLocation") != null;
     }
+
+    /**
+     * currentDirectory
+     * <p>
+     * Returns current directory for the configuration. Simplify operation.
+     * @param config configuration property that will be affected
+     * @param property property name as per config file.
+     */
+    private void currentDirectory(String config, String property) {
+        String directory = getProperty(property);
+        System.out.println("Current " + config + " directory: " + directory);
+    }
+
+
 }
