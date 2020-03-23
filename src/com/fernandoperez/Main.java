@@ -62,11 +62,11 @@ public class Main {
         captureFileLister.lister();
         System.out.println("All capture files have been listed");
 
-        DiskWriter diskWriter = new DiskWriter(setup.getProperty("nintendoLocation"),
+        /*DiskWriter diskWriter = new DiskWriter(setup.getProperty("nintendoLocation"),
                 setup.getProperty("destinationLocation"),
-                captureFileLister,gameRetrieve);
+                captureFileLister,gameRetrieve);*/
         //diskWriter.copier();
-        diskWriter.streamCopy();
+        //diskWriter.streamCopy();
         System.out.println("All captures have been organized");
     }
 
@@ -79,9 +79,14 @@ public class Main {
         System.out.println("SWITCH CAPTURE ORGANIZER");
         System.out.println("Organize the captures on your Switch's MicroSD or Directory based on game");
         System.out.println("Please select the option you wish to run:");
-        System.out.println("Current source: " + setup.getProperty("originalLocation"));
+        System.out.println("\nCurrent source: " + setup.getProperty("originalLocation"));
         System.out.println("Current destination: " + setup.getProperty("destinationLocation"));
-        System.out.println("1 - Organize");
+        if(setup.getProperty("deleteFiles").equals("true")) {
+            System.out.println("\u001B[31m"+"WARNING! Files on source will be deleted"+"\u001B[0m");
+        } else if (setup.getProperty("deleteFiles").equals("false")){
+            System.out.println("Files will be kept in the source directory.");
+        }
+        System.out.println("\n1 - Organize");
         System.out.println("2 - Change settings");
     }
 
@@ -96,7 +101,8 @@ public class Main {
             System.out.println("1 - Source directory");
             System.out.println("2 - Destination directory");
             System.out.println("3 - Owned games directory and file name");
-            System.out.println("4 - Get back to main menu");
+            System.out.println("4 - Source file deletion");
+            System.out.println("5 - Get back to main menu");
             try {
                 option = scanner.nextInt();
                 scanner.nextLine();
@@ -120,7 +126,11 @@ public class Main {
                 setup.setSavedGamesDirectory();
             } break;
 
-            case 4:
+            case 4: {
+                setup.setDeleteFiles();
+            } break;
+
+            case 5:
                 break;
 
         }

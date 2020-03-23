@@ -30,6 +30,10 @@ public class CaptureFileLister {
         gameRetrieve = new GameRetrieve(setup.getProperty("savedGamesLocation"));
     }
 
+    public GameRetrieve getGameRetrieve() {
+        return gameRetrieve;
+    }
+
     /**
      * hashExists
      * Confirm if the hash code exists already in the saved games database.
@@ -51,6 +55,8 @@ public class CaptureFileLister {
         File[] fList = directory.listFiles();
         String[] filenameSplit;
         String[] hashSplit;
+        String origin;
+        DiskWriter diskWriter = new DiskWriter(savedGames);
 
         Scanner scanner = new Scanner(System.in);
 
@@ -62,6 +68,7 @@ public class CaptureFileLister {
                     filenameSplit = file.getName().split("-");
                     hashSplit = filenameSplit[1].split("\\.");
 
+                    // CHECK IF THE GAME IS ALREADY IN THE DB
                     if(!hashExists(hashSplit[0])) {
                         System.out.println("Game not found. Please enter Game's title:");
                         System.out.println("Reference: " + file.getAbsolutePath());
@@ -74,6 +81,14 @@ public class CaptureFileLister {
                         String gameName = scanner.nextLine();
                         gameRetrieve.setNewGame(hashSplit[0],gameName);
                         savedGames.put(hashSplit[0],gameName);
+                    }
+
+                    // COPY FILE TO TARGET
+                    diskWriter.copyFile(file);
+
+                    // DELETE FILE IF SELECTED
+                    if(setup.getProperty("deleteFiles").equals("true")) {
+                        file.delete();
                     }
                 }
             }

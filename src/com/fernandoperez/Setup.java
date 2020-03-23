@@ -136,6 +136,10 @@ public class Setup {
             if (getProperty("savedGamesLocation") == null) {
                 setSavedGamesDirectory();
             }
+
+            if(getProperty("deleteFiles") == null) {
+                setDeleteFiles();
+            }
         }
     }
 
@@ -170,11 +174,16 @@ public class Setup {
         return prop.getProperty(property);
     }
 
-
+    /**
+     * fullProperties
+     *
+     * Verify that all properties have been defined by the user.
+     * @return boolean
+     */
     private boolean fullProperties() {
         return getProperty("nintendoLocation") != null &&
                 getProperty("originalLocation") != null && getProperty("destinationLocation") != null &&
-                getProperty("savedGamesLocation") != null;
+                getProperty("savedGamesLocation") != null && getProperty("deleteFiles") != null;
     }
 
     /**
@@ -187,6 +196,27 @@ public class Setup {
     private void currentDirectory(String config, String property) {
         String directory = getProperty(property);
         System.out.println("Current " + config + " directory: " + directory);
+    }
+
+    public void setDeleteFiles() {
+        Boolean validOption = false;
+        String option = "";
+        while(!validOption) {
+            System.out.println("Would you like to delete the imported files? (Y/N)");
+            option = scanner.next();
+            if(!option.toUpperCase().equals("Y") && !option.toUpperCase().equals("N")) {
+                System.out.println("Please answer Y or N");
+            } else {
+                validOption = true;
+            }
+        }
+
+        if(option.toUpperCase().equals("Y")) {
+            setProperty("deleteFiles","true");
+        } else {
+            setProperty("deleteFiles","false");
+        }
+
     }
 
 

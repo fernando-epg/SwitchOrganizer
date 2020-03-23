@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DiskWriter {
     /**
@@ -27,6 +28,8 @@ public class DiskWriter {
     private String newPath;
     private CaptureFileLister captureFileLister;
     private GameRetrieve gameRetrieve;
+    private HashMap<String,String> savedGames;
+    private Setup setup = new Setup();
 
     public DiskWriter(String originPath, String newPath, CaptureFileLister captureFileLister,
                       GameRetrieve gameRetrieve) {
@@ -34,6 +37,11 @@ public class DiskWriter {
         this.newPath = newPath;
         this.captureFileLister = captureFileLister;
         this.gameRetrieve = gameRetrieve;
+    }
+
+    public DiskWriter(HashMap<String, String> savedGames) {
+        this.savedGames = savedGames;
+        this.newPath = setup.getProperty("destinationLocation");
     }
 
     /**
@@ -75,7 +83,7 @@ public class DiskWriter {
                     origin = file.getAbsolutePath();
                     Path originPath = Paths.get(origin);
 
-                    if(captureFileLister.hashExists(hashSplit[0])) {
+                    if(hashExists(hashSplit[0])) {
                         String title = gameRetrieve.getTitle(hashSplit[0]);
                         createFolder(title);
                         Path targetDir = Paths.get(newPath + System.getProperty("file.separator") + title);
@@ -187,5 +195,60 @@ public class DiskWriter {
      */
     public void streamCopy() {
         streamCopier(this.originPath);
+    }
+
+    /**
+     * copyFile
+     * copies current file that's being handled by CaptureFileLister.
+     * @param file
+     */
+    public void copyFile(File file) {
+        String[] filenameSplit = file.getName().split("-");
+        String[] hashSplit = filenameSplit[1].split("\\.");
+        String origin = file.getAbsolutePath();
+        Path originPath = Paths.get(origin);
+
+        if(hashExists(hashSplit[0])) {
+            String title = getTitle(hashSplit[0]);
+            createFolder(title);
+            Path targetDir = Paths.get(newPath + System.getProperty("file.separator") + title);
+            Path targetFile = targetDir.resolve(file.getName());
+
+            if(!new File(targetFile.toString()).exists()) {
+                FileChannel sourceChannel = null;
+                FileChannel targetChannel = null;
+
+                try{
+                    sourceChannel = new FileInputStream(new File(file.getAbsolutePath())).getChannel();
+                    targetChannel = new FileOutputStream(new File(targetFile.toString())).getChannel();
+                    targetChannel.transferFrom(sourceChannel,0,sourceChannel.size());
+                }
+
+                catch(FileAlreadyExistsException ex) {
+                    System.err.format(file.getName() + " already exists");
+                }
+                catch(IOException ex) {
+                    System.err.format("I/O error while copying file");
+                }
+                finally {
+                    try {
+                        sourceChannel.close();
+                        targetChannel.close();
+                    } catch (IOException ex) {
+                        System.err.format("Unable to close stream");
+                    } catch (NullPointerException ex) {
+                        System.err.format("Unable to find channel to close");
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean hashExists(String hash) {
+        return savedGames.containsKey(hash);
+    }
+
+    private String getTitle(String hash) {
+        return savedGames.get(hash);
     }
 }
