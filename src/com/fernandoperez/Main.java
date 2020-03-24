@@ -38,6 +38,8 @@ public class Main {
                     changeSettings();
                     option = 0;
                     break;
+                case 3:
+                    break;
                 default: {
                     System.out.println("Please enter a correct value");
                     option = 0;
@@ -88,6 +90,7 @@ public class Main {
         }
         System.out.println("\n1 - Organize");
         System.out.println("2 - Change settings");
+        System.out.println("3 - Quit");
     }
 
 
