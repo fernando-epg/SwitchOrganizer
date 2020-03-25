@@ -84,9 +84,9 @@ public class Main {
         System.out.println("\nCurrent source: " + setup.getProperty("originalLocation"));
         System.out.println("Current destination: " + setup.getProperty("destinationLocation"));
         if(setup.getProperty("deleteFiles").equals("true")) {
-            System.out.println("\u001B[31m"+"WARNING! Files on source will be deleted"+"\u001B[0m");
+            System.out.println("\nWARNING! Files on source will be deleted");
         } else if (setup.getProperty("deleteFiles").equals("false")){
-            System.out.println("Files will be kept in the source directory.");
+            System.out.println("\nFiles will be kept in the source directory.");
         }
         System.out.println("\n1 - Organize");
         System.out.println("2 - Change settings");
