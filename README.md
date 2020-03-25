@@ -16,6 +16,9 @@ So you'll get a lot of folders. If you would like to find that particular captur
 
 This will organize all the captures based on the game, leaving the file name as it is. The filename already has the date in the format YYYYMMDDHHMMSS00 at the start of the filename.
 
+## How to download it?
+You can either download the source code, or go to the Releases section.
+
 ## How to use it
 If it's the first time you run the program, it will begin by asking the settings for the operation. First, it will ask for the source of the files (if it's on an SD card, then use the SD card's drive letter). If you just copy and paste the Album folder, then you will need to save that on a folder named **Nintendo** (Sorry!).
 
