@@ -79,6 +79,7 @@ public class CaptureFileLister {
                             System.err.format("Unable to open sample file");
                         }
                         String gameName = scanner.nextLine();
+                        gameName.replace(":"," -");
                         gameRetrieve.setNewGame(hashSplit[0],gameName);
                         savedGames.put(hashSplit[0],gameName);
                     }

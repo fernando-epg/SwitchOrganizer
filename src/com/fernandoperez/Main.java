@@ -58,7 +58,7 @@ public class Main {
         GameRetrieve gameRetrieve = new GameRetrieve(setup.getProperty("savedGamesLocation"));
         gameRetrieve.savedGameRetriever();
         storedGames = gameRetrieve.getSavedGames();
-        System.out.println("All games have been identified");
+        System.out.println("All saved games have been loaded");
 
         CaptureFileLister captureFileLister = new CaptureFileLister(setup.getProperty("nintendoLocation"),storedGames);
         captureFileLister.lister();
